@@ -47,6 +47,8 @@ namespace GeorgianEgg.Controllers
                 .Include(p => p.Brand)
                 .ToList();
 
+            products = products.OrderBy(p => p.Name).ToList();
+
             return View(products);
         }
 

@@ -22,6 +22,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-controller="Shop" asp-action="Index">Shop</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="Support" asp-action="Index">Support</a>
+                        </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
@@ -33,6 +36,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-controller="Products" asp-action="Index">Products</a>
                             </li>
+
                         }
                     </ul>
                     <partial name="_LoginPartial" />
@@ -48,7 +52,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; Your Name & Student Number Here - COMP2084-W23-Final-A - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; Neel Shah 200507915 - COMP2084-W23-Final-A - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
