@@ -122,6 +122,20 @@ namespace GeorgianEggTests
         }
 
         [TestMethod]
+
+        public void DeleteProduct_GET_RemoveIdFromProductController()
+        {   var controller = new Product();
+            
+
+        
+        var result = controller.Delete(ProductId);
+
+        
+        Assert.IsNotNull(result);
+           Assert.AreEqual("Delete", result.ViewName);
+        }
+
+        [TestMethod]
         public async Task CreateInvalidDoesntCreate()
         {
             // Arrange
@@ -156,6 +170,30 @@ namespace GeorgianEggTests
             Assert.IsNull(result.ViewName);
 	    }
 
+        [TestMethod]
+        public void DeleteConfirmed_RemovesProductFromDatabase()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .Options;
+            var dbContext = new ApplicationDbContext(options);
+            var product = new Product { Id = 1, Name = "Test Product", Price = 10 };
+            dbContext.Products.Add(product);
+            dbContext.SaveChanges();
+
+            var controller = new ProductsController(dbContext);
+
+            // Act
+            var result = controller.DeleteConfirmed(1) as RedirectToActionResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+
+            var deletedProduct = dbContext.Products.FirstOrDefault(p => p.Id == 1);
+            Assert.IsNull(deletedProduct);
+        }
 
         [TestMethod]
         public async Task EditUpdatesProduct()
